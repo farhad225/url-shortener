@@ -1,4 +1,4 @@
-package org.dkb.hash.generation.service;
+package org.dkb.server;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -6,7 +6,7 @@ import org.springframework.test.context.ActiveProfiles;
 
 @SpringBootTest
 @ActiveProfiles("test")
-class HashGenerationApplicationTests {
+class BackendServerApplicationTests {
 
 	@Test
 	void contextLoads() {
