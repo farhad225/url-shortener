@@ -41,7 +41,6 @@ public class UrlShorteningService {
 				.bodyToMono(GetHashResponse.class)
 				.block();
 
-		// Validation method
 		if (response == null || response.originalUrl() == null) {
 			log.error("Unable to get original url for hash {}", hash);
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, ERROR_NO_MAPPING_FOUND);
@@ -64,7 +63,6 @@ public class UrlShorteningService {
 				.bodyToMono(CreateHashResponse.class)
 				.block();
 
-		// Validation method
 		if (hashResponse == null || hashResponse.hash() == null) {
 			log.error("Unable to get hash for original url {}", request.originalUrl());
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, ERROR_NO_AVAILABLE_HASHES);
