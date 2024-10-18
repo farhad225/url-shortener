@@ -1,16 +1,29 @@
 services:
 
-  app:
+  backend-server:
     build:
-      context: .
+      context: ./backend-server
       dockerfile: Dockerfile
-    container_name: hash-generation-service
+    container_name: backend-server
     ports:
       - "8080:8080"
+    volumes:
+      - ./backend-server/src/main/resources/application-dev.properties:/app/application.properties
+    depends_on:
+      - hash-generation-service
+    restart: always
+
+  hash-generation-service:
+    build:
+      context: ./hash-generation-service
+      dockerfile: Dockerfile
+    container_name: hash-generation-service
     environment:
       HASH_GENERATION_DB_URL: jdbc:postgresql://db:5432/hash-generation-db
       HASH_GENERATION_DB_USERNAME: postgres
       HASH_GENERATION_DB_PASSWORD: postgres
+    volumes:
+      - ./hash-generation-service/src/main/resources/application-dev.properties:/app/application.properties
     depends_on:
       db:
         condition: service_healthy
